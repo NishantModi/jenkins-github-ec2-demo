@@ -29,7 +29,7 @@ pipeline {
     stage('Deploy to EC2') {
       steps {
         // wraps the following steps in SSH agent
-        sshagent (credentials: ["${EC2_SSH}"]) {
+        sshagent (credentials: ["ec2-deploy-key"]) {
           // create target dir, copy code, restart service
           sh """
             ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} 'mkdir -p ${REMOTE_DIR}'
